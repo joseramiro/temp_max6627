@@ -1,7 +1,7 @@
 #ifndef PLIB_MAX6627_SPI_H
 #define PLIB_MAX6627_SPI_H
 
-#include "libs/util/plibs_utils.h"  // used for SPI struct
+#include "libs/common_c_libs/plib_comm_struct.h"
 
 #define MAX6627_DUMMY_DATA      0xFF
 
