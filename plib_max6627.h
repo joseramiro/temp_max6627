@@ -14,21 +14,21 @@
 typedef struct
 {
     unsigned char id;   /**< Identifiant du module (voir @ref FansMax31723IdList) */
-    SPIConfiguration_t spi;
+    SPI_t spi;
 }MAX6627Conf_t;
 
 /**
  * @brief Démarre une transmission SPI avec le module MAX31723.
  * @param spi Pointeur vers la configuration SPI utilisée pour la communication.
  */
-void MAX6627_StartTranmission(SPIConfiguration_t *spi);
+void MAX6627_StartTranmission(SPI_t *spi);
 
 /**
  * @brief Termine une transmission SPI avec le module MAX31723.
  * @param spi Pointeur vers la configuration SPI utilisée pour la communication.
  */
-void MAX6627_EndTranmission(SPIConfiguration_t *spi);
+void MAX6627_EndTranmission(SPI_t *spi);
 
-void MAX6627_ReadTemperatureReg(SPIConfiguration_t *spi, unsigned char* readData);
+void MAX6627_ReadTemperatureReg(SPI_t *spi, unsigned char* readData);
 
 #endif  // PLIB_MAX31723_H
