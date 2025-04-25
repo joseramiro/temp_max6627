@@ -1,3 +1,12 @@
+/**
+ * @file plib_max6627.c
+ * @brief Pilote pour le MAX6927 (capteur de température)
+ * @author Ramiro Najera
+ * @version 1.0.0
+ * @date 2025-04-24
+ * @copyright Copyright (c) 2025
+ */
+
 #include "plib_max6627.h"
 #include "plib_max6627_spi.h"
 
