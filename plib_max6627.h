@@ -11,9 +11,12 @@
  */
 
 #include "libs/common_c_libs/plib_comm_struct.h"
+#include "libs/common_c_libs/plib_data_struct.h"
 
 /** @brief Taille du registre de température */
 #define MAX6627_TEMP_REG_SIZE   2
+
+#define MAX6627_TEMP_COEFF      0.0625
 
 /**
  * @struct MAX6627_t
@@ -23,6 +26,8 @@ typedef struct
 {
     /** @brief Identifiant du module */
     unsigned char id;
+    /** @brief Temperature du capteur */
+    float temperature;
     /** @brief Configuration de la communication SPI */
     SPI_t spi;
 }MAX6627_t;
@@ -44,6 +49,19 @@ void MAX6627_EndTranmission(SPI_t *spi);
  * @param spi Configuration de la communication SPI
  * @param readData Température lue
  */
-void MAX6627_ReadTemperatureReg(SPI_t *spi, unsigned char* readData);
+void MAX6627_ReadTemperatureReg(SPI_t *spi, union IntUsCharUnion* readData);
+
+/**
+ * @brief Lit la température du capteur et met à jour la variable de température
+ * @param obj Module du capteur de température MAX6627
+ */
+void MAX6627_UpdateTemperature(MAX6627_t obj);
+
+/**
+ * @brief Retourne la valeur de température
+ * @param obj Module du capteur de temperature MAX6627
+ * @return float Dernière valeur de température
+ */
+float MAX6627_GetTemperature(MAX6627_t obj);
 
 #endif  // PLIB_MAX6627_H

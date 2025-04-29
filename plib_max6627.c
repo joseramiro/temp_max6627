@@ -21,12 +21,38 @@ void MAX6627_EndTranmission(SPI_t *spi)
 }
 
 // Basic functions
-void MAX6627_ReadTemperatureReg(SPI_t *spi, unsigned char* readData)
+void MAX6627_ReadTemperatureReg(SPI_t *spi, union IntUsCharUnion* readData)
 {
     // Start tranmission
     MAX6627_StartTranmission(spi);
     // Read register 
-    MAX6627_Read_Buffer(spi, readData, MAX6627_TEMP_REG_SIZE);
+    MAX6627_Read_Buffer(spi, &readData->usChar[0], MAX6627_TEMP_REG_SIZE);
     // Stop tranmission
     MAX6627_EndTranmission(spi);
+}
+
+void MAX6627_UpdateTemperature(MAX6627_t obj)
+{
+    union IntUsCharUnion rawData;
+
+    // Read raw register
+    MAX6627_ReadTemperatureReg(&obj.spi, &rawData);
+
+    // Right shift (bit 2-bit 0 from register unused)
+    rawData.IntValue = (rawData.IntValue >> 3);
+
+    // Sign-extend 13-bit value (bit 12 is the sign bit)
+    if (rawData.IntValue & 0x1000)  // If negative
+    {
+        //rawData.IntValue |= 0xFFFFE000;  // Sign-extend to 32 bits
+        rawData.IntValue |= 0xF000;      // Sign-extend to 16 bits
+    }
+
+    // Update temperature vlaue in float
+    obj.temperature = rawData.IntValue * MAX6627_TEMP_COEFF;
+}
+
+float MAX6627_GetTemperature(MAX6627_t obj)
+{
+    return obj.temperature;
 }

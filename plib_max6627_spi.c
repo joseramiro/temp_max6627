@@ -25,6 +25,6 @@ void MAX6627_Read_Buffer(SPI_t *spi, unsigned char* data, unsigned int size)
     
     for(i = 0; i < size; i++)
     {
-        MAX6627_Read_Byte(spi, data[i]);
+        MAX6627_Read_Byte(spi, &data[i]);
     } 
 }
