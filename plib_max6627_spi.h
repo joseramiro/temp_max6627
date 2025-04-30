@@ -12,9 +12,6 @@
 
 #include "libs/common_c_libs/plib_comm_struct.h"
 
-/** @brief Données fictives pendant la lecture */
-#define MAX6627_DUMMY_DATA      0xFF
-
 /**
  * @brief Lit des données dans le MAX6627 via SPI.
  * @param spi Pointeur vers la configuration SPI utilisée pour la communication.

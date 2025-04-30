@@ -2,7 +2,7 @@
 #define PLIB_MAX6627_H
 
 /**
- * @file plib_max6627.c
+ * @file plib_max6627.h
  * @brief Pilote pour le MAX6927 (capteur de température)
  * @author Ramiro Najera
  * @version 1.0.1
