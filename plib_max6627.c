@@ -2,7 +2,7 @@
  * @file plib_max6627.c
  * @brief Pilote pour le MAX6927 (capteur de température)
  * @author Ramiro Najera
- * @version 1.0.1
+ * @version 1.0.2
  * @date 2025-04-24
  * @copyright Copyright (c) 2025
  */
@@ -13,12 +13,18 @@
 
 void MAX6627_StartTranmission(SPI_t *spi)
 {
-    spi->cs.clear();
+    if(spi->en.clear != NULL)
+        spi->en.clear();
+    if(spi->cs.clear != NULL) 
+        spi->cs.clear();
 }
 
 void MAX6627_EndTranmission(SPI_t *spi)
 {
-    spi->cs.set();
+    if(spi->cs.set != NULL)
+        spi->cs.set();
+    if(spi->en.set != NULL)
+        spi->en.set();
 }
 
 // Basic functions
